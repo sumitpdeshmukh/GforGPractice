@@ -10,8 +10,10 @@ class GFG {
 		Scanner in = new Scanner(System.in);
 		int tests = in.nextInt();
 		while (tests > 0) {
+		    long startime = System.nanoTime();
 		    int size = in.nextInt();
 		    int index = 0;
+		    int n = size;
 		    int[] arr = new int[size];
 		    while(index < size) {
 		        arr[index] = in.nextInt();
@@ -21,18 +23,16 @@ class GFG {
 		    int count = 0;
 		    int i =0, j = i + 1, k = j + 1;
 		    
-		    for (i = 0; i < j; i++) {
-    		    for (j = i +1; j < k; j++) {
-    		        for (k = j +1; k < size ; k++) {
-        		        if (arr[i] + arr[j] > arr[k]) {
-        		            count += 1;
-        		            System.out.print(arr[i] + " ");
-        		            System.out.print(arr[j]+ " ");
-        		            System.out.println(arr[k]);
-        		        }
-    		        }
+		    for (i = 0; i < size - 2; ++i) {
+		        k = i + 2;
+    		    for (j = i +1; j < size; ++j) {
+    		        while(k < size && arr[i] + arr[j] > arr[k])
+    		            k++;
+        		    count += k - j -1;
 		        }
 		    }
+		    
+		    System.out.println(System.nanoTime() - startime);
 		    System.out.println(count);
 		    tests--;
 		}
